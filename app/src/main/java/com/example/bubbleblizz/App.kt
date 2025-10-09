@@ -12,9 +12,9 @@ import com.example.bubbleblizz.ui.theme.BubbleBlizzTheme
 @Composable
 fun App() {
     val themeVm: ThemeViewModel = viewModel()
-    val mode by themeVm.mode.collectAsState()  // ✅ observes state changes
+    val mode by themeVm.mode.collectAsState()
 
-    BubbleBlizzTheme(darkTheme = (mode == ThemeMode.DARK)) {  // ✅ reacts live
+    BubbleBlizzTheme(darkTheme = (mode == ThemeMode.DARK)) {
         AppNav(themeVm = themeVm)
     }
 }

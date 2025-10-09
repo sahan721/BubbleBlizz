@@ -15,6 +15,6 @@ class ThemeViewModel : ViewModel() {
         _mode.value = if (enabled) ThemeMode.DARK else ThemeMode.LIGHT
     }
 
-    // ✅ This helper makes App.kt work
+
     fun isDark() = _mode.value == ThemeMode.DARK
 }

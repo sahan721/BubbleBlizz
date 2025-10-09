@@ -37,7 +37,6 @@ fun ProfileScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = { BackTopBar(title = "Settings", onBack = onBack) }
     ) { padding ->
-        // 🌀 Added verticalScroll for better UX on smaller screens
         Column(
             Modifier
                 .fillMaxSize()

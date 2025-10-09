@@ -100,7 +100,7 @@ private fun DropdownField(
 
 @Composable
 fun CheckoutPaymentScreen(onBack:()->Unit, onNext:()->Unit){
-    val snackbarHostState = remember { SnackbarHostState() } // FIX
+    val snackbarHostState = remember { SnackbarHostState() }
     val cs = MaterialTheme.colorScheme
     val tfColors = OutlinedTextFieldDefaults.colors(
         focusedBorderColor = cs.primary,
