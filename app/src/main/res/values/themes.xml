@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Launch Splash Theme -->
+    <style name="Theme.BubbleBlizz.Launch" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <!-- 🎨 Main App Theme -->
+    <style name="Theme.BubbleBlizz" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+</resources>
