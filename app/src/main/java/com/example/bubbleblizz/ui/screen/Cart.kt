@@ -16,6 +16,7 @@ import com.example.bubbleblizz.ui.component.GradientHeader
 import com.example.bubbleblizz.ui.component.BackTopBar
 import com.example.bubbleblizz.util.CartStore
 
+
 @Composable
 fun CartScreen(
     onCheckout: () -> Unit,
@@ -53,67 +54,73 @@ fun CartScreen(
             GradientHeader(search = search, onSearch = { search = it })
             BackTopBar(title = "My Cart", onBack = onBack)
 
-            // make it Scrollable
-            Column(
-                Modifier
-                    .padding(horizontal = 16.dp)
-                    .verticalScroll(rememberScrollState())
-            ) {
-                for (line in CartStore.lines) {
-                    Row(
+            val cartItems = CartStore.lines ?: emptyList()
+
+            Column(Modifier.padding(horizontal = 16.dp)) {
+                if (cartItems.isEmpty()) {
+                    Box(
                         Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                            .padding(vertical = 80.dp),
+                        contentAlignment = Alignment.Center
                     ) {
-                        Image(
-                            painter = painterResource(
-                                Images.ofName("img_${line.id}")
-                            ),
-                            contentDescription = line.name,
-                            modifier = Modifier
-                                .size(60.dp)
-                                .padding(end = 12.dp)
+                        Text(
+                            "Your cart is empty 🛒",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Column(Modifier.weight(1f)) {
-                            Text(line.name, style = MaterialTheme.typography.titleMedium)
-                            Text(line.sub)
-                            Text("LKR ${line.price}")
-                        }
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            TextButton(onClick = {
-                                if (line.qty > 1) CartStore.updateQty(line.id, line.qty - 1)
-                            }) { Text("−") }
-                            Text(line.qty.toString(), modifier = Modifier.padding(horizontal = 8.dp))
-                            TextButton(onClick = { CartStore.updateQty(line.id, line.qty + 1) }) { Text("+") }
-                        }
                     }
-                    OutlinedButton(
-                        onClick = { CartStore.remove(line.id) },
-                        modifier = Modifier.align(Alignment.End)
-                    ) { Text("Remove") }
-                    Divider()
-                }
+                } else {
+                    for (line in cartItems) {
+                        Row(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 8.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            val imageRes = Images.ofName("img_${line.id}").takeIf { it != 0 }
+                                ?: Images.ofName("img_placeholder")
+                            Image(
+                                painter = painterResource(imageRes),
+                                contentDescription = line.name,
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .padding(end = 12.dp)
+                            )
+                            Column(Modifier.weight(1f)) {
+                                Text(line.name, style = MaterialTheme.typography.titleMedium)
+                                Text(line.sub)
+                                Text("LKR ${line.price}")
+                            }
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                TextButton(onClick = {
+                                    if (line.qty > 1) CartStore.updateQty(line.id, line.qty - 1)
+                                }) { Text("−") }
 
-                Spacer(Modifier.height(20.dp))
-                Divider()
-                Spacer(Modifier.height(10.dp))
+                                Text(line.qty.toString(), modifier = Modifier.padding(horizontal = 8.dp))
 
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 12.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Button(
-                        onClick = onCheckout,
-                        modifier = Modifier
-                            .width(240.dp)
-                            .padding(bottom = 12.dp)
-                    ) {
-                        Text("Checkout")
+                                TextButton(onClick = {
+                                    CartStore.updateQty(line.id, line.qty + 1)
+                                }) { Text("+") }
+                            }
+                        }
+                        OutlinedButton(
+                            onClick = { CartStore.remove(line.id) },
+                            modifier = Modifier.align(Alignment.End)
+                        ) { Text("Remove") }
+                        Divider()
                     }
                 }
+            }
+
+            Spacer(Modifier.weight(1f))
+            Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                Button(
+                    onClick = onCheckout,
+                    modifier = Modifier
+                        .padding(bottom = 12.dp)
+                        .width(240.dp)
+                ) { Text("Checkout") }
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.bubbleblizz.ui.screen
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,9 @@ import com.example.bubbleblizz.util.CartLine
 import com.example.bubbleblizz.util.FavoritesStore
 import com.example.bubbleblizz.util.FavLine
 import com.example.bubbleblizz.util.Catalog
+import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.ui.graphics.Color
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,11 +44,22 @@ fun MenuScreen(
                 title = categoryName,
                 onBack = onBack,
                 trailing = {
-                    TextButton(onClick = onCart) { Text("Cart") }
+                    TextButton(onClick = onCart) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Outlined.ShoppingCart,
+                                contentDescription = "Cart",
+                                tint = Color.Black
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Text("Cart", color = Color.Black)
+                        }
+                    }
                 }
             )
         }
-    ) { padding ->
+    )
+    { padding ->
         Column(Modifier.padding(padding).padding(12.dp)) {
             if (items.isEmpty()) {
                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
