@@ -42,34 +42,19 @@ object Catalog {
             "Crunchy Oreos blended into creamy shake.","img_oreo_shake","Dairy Drinks"),
         Product("caramel_latte","Caramel Latte","400 ml",650,4.6,
             "Sweet caramel with steamed milk and espresso.","img_caramel_latte","Dairy Drinks"),
-        Product("matcha_latte","Matcha Latte","400 ml",660,4.7,
-            "Creamy blend of matcha and milk.","img_matcha","Dairy Drinks"),
-        Product("hazelnut_milk","Hazelnut Milk","400 ml",640,4.4,
-            "Nutty, slightly sweet and refreshing milk.","img_hazelnut_milk","Dairy Drinks"),
 
         // SOFT DRINKS
-        Product("cola","Cola","330 ml",480,4.3,"Classic fizzy cola drink.","img_cola","Soft Drink"),
+        Product("cola","Coke","330 ml",480,4.3,"Classic fizzy cola drink.","img_coke","Soft Drink"),
         Product("sprite","Sprite","330 ml",470,4.4,"Lime-lemon flavored soda.","img_sprite","Soft Drink"),
         Product("fanta","Fanta Orange","330 ml",460,4.2,"Orange-flavored sparkling soft drink.","img_fanta","Soft Drink"),
-        Product("soda","Soda Water","330 ml",400,4.1,"Plain sparkling carbonated water.","img_soda","Soft Drink"),
-        Product("ginger_beer","Ginger Beer","330 ml",490,4.4,"Spicy and tangy ginger soda.","img_ginger_beer","Soft Drink"),
-        Product("tonic","Tonic Water","330 ml",420,4.3,"Quinine-flavored refreshing tonic.","img_tonic","Soft Drink"),
-        Product("cream_soda","Cream Soda","330 ml",450,4.2,"Smooth creamy vanilla soda.","img_cream_soda","Soft Drink"),
-        Product("root_beer","Root Beer","330 ml",460,4.3,"Classic American herbal soda.","img_root_beer","Soft Drink"),
-        Product("lemonade","Lemonade","330 ml",440,4.5,"Sweet-tart lemon sparkling drink.","img_lemonade","Soft Drink"),
-        Product("apple_soda","Apple Soda","330 ml",470,4.4,"Fizzy apple-flavored soda.","img_apple_soda","Soft Drink"),
+        Product("pepsi","Pepsi","330 ml",400,4.1,"Plain sparkling carbonated water.","img_pepsi","Soft Drink"),
 
         // ENERGY DRINKS
         Product("redbull","Red Bull","250 ml",650,4.6,"Boosts energy and focus.","img_redbull","Energy Drink"),
         Product("monster","Monster Energy","500 ml",700,4.5,"Bold taste with powerful energy.","img_monster","Energy Drink"),
         Product("sting","Sting","250 ml",500,4.4,"Sweet-tangy flavor energy boost.","img_sting","Energy Drink"),
-        Product("reload","Reload","500 ml",650,4.3,"Tropical energy drink.","img_reload","Energy Drink"),
-        Product("cloud9","Cloud 9","500 ml",640,4.4,"Smooth taste with caffeine boost.","img_cloud9","Energy Drink"),
-        Product("volt","Volt Energy","500 ml",670,4.3,"Electrifying citrus flavor.","img_volt","Energy Drink"),
-        Product("powerup","Power Up","500 ml",680,4.5,"Invigorating drink for long days.","img_powerup","Energy Drink"),
-        Product("boost","Boost","250 ml",600,4.5,"Chocolate-flavored energy drink.","img_boost","Energy Drink"),
-        Product("shark","Shark","500 ml",710,4.6,"Refreshing tropical-flavored energy drink.","img_shark","Energy Drink"),
-        Product("burn","Burn","500 ml",720,4.4,"Smooth stimulating blend.","img_burn","Energy Drink")
+        Product("rockstar","Rockstar","500 ml",650,4.3,"Tropical energy drink.","img_rockstar","Energy Drink"),
+
     ).associateBy { it.id }
 
     fun get(id: String): Product =
