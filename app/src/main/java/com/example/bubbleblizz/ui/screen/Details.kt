@@ -23,28 +23,114 @@ import com.example.bubbleblizz.util.CartStore
 import com.example.bubbleblizz.util.Catalog
 import com.example.bubbleblizz.util.FavLine
 import com.example.bubbleblizz.util.FavoritesStore
-@Composable fun ProductDetailsScreen(id: String, onBack: ()->Unit, onGoHome:()->Unit, onGoCart:()->Unit, onGoFavorites:()->Unit, onGoSettings:()->Unit) {
+@Composable
+fun ProductDetailsScreen(
+    id: String,
+    onBack: () -> Unit,
+    onGoHome: () -> Unit,
+    onGoCart: () -> Unit,
+    onGoFavorites: () -> Unit,
+    onGoSettings: () -> Unit
+) {
     val p = remember(id) { Catalog.get(id) }
     var search by remember { mutableStateOf("") }
     var tab by remember { mutableStateOf(0) }
-    Scaffold(containerColor = MaterialTheme.colorScheme.background, bottomBar = { BubbleBottomBar(selected = tab, onSelect = { tab = it; when(it){0->onGoHome();1->onGoCart();2->onGoFavorites();3->onGoSettings()} }) }) { padding ->
-        Column(Modifier.padding(padding).fillMaxSize()) {
-            GradientHeader(search = search, onSearch = { search = it })
-            BackTopBar(title = p.name, onBack = onBack, trailing = { Text("LKR ${p.price}") })
-            Surface(tonalElevation = 1.dp, shape = RoundedCornerShape(16.dp), modifier = Modifier.padding(horizontal = 16.dp).fillMaxWidth()) {
-                Column(Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                    Box(Modifier.size(120.dp).clip(CircleShape).background(Brush.radialGradient(listOf(Color(0xFFFFB74D), Color(0xFFFFECB3))))) {
-                        Image(painterResource(Images.ofName(p.drawableName)), contentDescription = p.name, modifier = Modifier.fillMaxSize().padding(12.dp))
+
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        bottomBar = {
+            BubbleBottomBar(
+                selected = tab,
+                onSelect = {
+                    tab = it
+                    when (it) {
+                        0 -> onGoHome()
+                        1 -> onGoCart()
+                        2 -> onGoFavorites()
+                        3 -> onGoSettings()
                     }
-                    Spacer(Modifier.height(12.dp)); Text(p.description, textAlign = TextAlign.Left)
+                }
+            )
+        }
+    ) { padding ->
+        Column(
+            Modifier
+                .padding(padding)
+                .fillMaxSize()
+        ) {
+            GradientHeader(search = search, onSearch = { search = it })
+
+            BackTopBar(
+                title = p.name,
+                onBack = onBack,
+                trailing = { Text("LKR ${p.price}") }
+            )
+
+            Surface(
+                tonalElevation = 1.dp,
+                shape = RoundedCornerShape(16.dp),
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .fillMaxWidth()
+            ) {
+                Column(
+                    Modifier.padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        Modifier
+                            .size(120.dp)
+                            .clip(CircleShape)
+                            .background(
+                                Brush.radialGradient(
+                                    listOf(Color(0xFFFFB74D), Color(0xFFFFECB3))
+                                )
+                            )
+                    ) {
+                        Image(
+                            painterResource(Images.ofName(p.drawableName)),
+                            contentDescription = p.name,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(12.dp)
+                        )
+                    }
+
+                    Spacer(Modifier.height(12.dp))
+                    Text(p.description, textAlign = TextAlign.Left)
                 }
             }
+
             Spacer(Modifier.height(12.dp))
+
             Row(Modifier.padding(horizontal = 16.dp)) {
-                OutlinedButton(onClick = { FavoritesStore.toggle(FavLine(p.id, p.name, p.size, p.price, p.rating)) }, modifier = Modifier.weight(1f), shape = RoundedCornerShape(12.dp)) { Text("ADD TO FAVORITE") }
+                OutlinedButton(
+                    onClick = {
+                        FavoritesStore.toggle(
+                            FavLine(p.id, p.name, p.size, p.price, p.rating)
+                        )
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("ADD TO FAVORITE")
+                }
+
                 Spacer(Modifier.width(12.dp))
-                Button(onClick = { CartStore.add(CartLine(p.id, p.name, p.size, p.price, 1)) }, modifier = Modifier.weight(1f), shape = RoundedCornerShape(12.dp)) { Text("ADD TO CART") }
+
+                Button(
+                    onClick = {
+                        CartStore.add(
+                            CartLine(p.id, p.name, p.size, p.price, 1)
+                        )
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Text("ADD TO CART")
+                }
             }
+
             Spacer(Modifier.height(80.dp))
         }
     }

@@ -150,7 +150,7 @@ fun BubbleBottomBar(
 
                 Column(
                     modifier = Modifier
-                        .weight(1f) // ✅ ensures all are equal width
+                        .weight(1f)
                         .padding(horizontal = 4.dp)
                         .clip(RoundedCornerShape(20.dp))
                         .background(

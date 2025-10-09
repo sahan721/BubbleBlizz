@@ -6,7 +6,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-// --- Light Mode Colors ---
+// Light Mode Colors
 private val LightColorScheme = lightColorScheme(
     primary = Color(0xFFFFC107),
     secondary = Color(0xFF03A9F4),
@@ -18,7 +18,7 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Color.Black
 )
 
-// --- Dark Mode Colors ---
+// Dark Mode Colors
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFFFF9800),
     secondary = Color(0xFF80D8FF),
@@ -30,7 +30,7 @@ private val DarkColorScheme = darkColorScheme(
     onSurface = Color.White
 )
 
-// --- Theme Composable ---
+// Theme Composable
 @Composable
 fun BubbleBlizzTheme(
     darkTheme: Boolean = false,
@@ -40,7 +40,7 @@ fun BubbleBlizzTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = AppTypography, // ✅ uses your Type.kt file
+        typography = AppTypography,
         content = content
     )
 }

@@ -146,7 +146,7 @@ fun ProfileScreen(
                 trailing = { Icon(Icons.Outlined.ChevronRight, contentDescription = null) }
             )
 
-            Spacer(Modifier.height(24.dp)) // smooth bottom padding
+            Spacer(Modifier.height(24.dp))
         }
     }
 }

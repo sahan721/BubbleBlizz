@@ -102,7 +102,7 @@ fun HomeScreen(
                 onEnergy = { onMenu("Energy Drink") }
             )
 
-            Spacer(modifier = Modifier.height(90.dp)) // Prevent overlap with bottom nav
+            Spacer(modifier = Modifier.height(90.dp))
         }
     }
 }
@@ -193,7 +193,7 @@ private fun CategoryGrid(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 8.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp) // ⬅ smaller vertical gap
+        verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),

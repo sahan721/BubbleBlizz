@@ -73,7 +73,15 @@ object Catalog {
     ).associateBy { it.id }
 
     fun get(id: String): Product =
-        products[id] ?: Product("unknown","Unknown","",0,0.0,"No description available","img_placeholder","Unknown")
+        products[id] ?: Product(
+            "unknown",
+            "Unknown",
+            "",
+            0,
+            0.0,
+            "No description available",
+            "img_placeholder",
+            "Unknown")
 
     fun getByCategory(category: String): List<Product> =
         products.values.filter { it.category == category }

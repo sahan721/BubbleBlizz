@@ -8,7 +8,7 @@ import com.example.bubbleblizz.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // ✅ Apply your normal theme AFTER splash background is shown
+
         setTheme(R.style.Theme_BubbleBlizz)
 
         super.onCreate(savedInstanceState)

@@ -7,7 +7,7 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
-    <!-- 🎨 Main App Theme -->
+    <!-- Main App Theme -->
     <style name="Theme.BubbleBlizz" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@color/white</item>
     </style>
