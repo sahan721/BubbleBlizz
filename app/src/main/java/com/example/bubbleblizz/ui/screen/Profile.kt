@@ -110,10 +110,18 @@ fun ProfileScreen(
                         onCheckedChange = { checked ->
                             darkChecked = checked
                             themeVm.toggleDark(checked)
-                        }
+                        },
+                        colors = SwitchDefaults.colors(
+                            checkedThumbColor = Color.White,
+                            checkedTrackColor = Color.Black,
+                            uncheckedThumbColor = Color.LightGray,
+                            uncheckedTrackColor = Color.White
+
+                        )
                     )
                 }
             )
+
 
             Spacer(Modifier.height(12.dp))
 

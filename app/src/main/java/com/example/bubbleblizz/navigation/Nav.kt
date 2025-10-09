@@ -83,7 +83,9 @@ fun AppNav(modifier: Modifier = Modifier, themeVm: ThemeViewModel) {
                 onProfile = { nav.navigate(Route.PROFILE) },
                 onFavorites = { nav.navigate(Route.FAVORITES) },
                 onCart = { nav.navigate(Route.CART) },
-                onBack = { nav.popBackStack() }
+                onBack = { nav.popBackStack() },
+                onDetails = { id -> nav.navigate("details/$id") }
+
             )
         }
 

@@ -1,16 +1,16 @@
 package com.example.bubbleblizz.ui.screen
 
-import android.R.attr.delay
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -20,19 +20,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bubbleblizz.R
 import com.example.bubbleblizz.ui.component.BubbleBottomBar
-import com.example.bubbleblizz.ui.component.GradientHeader
-import kotlinx.coroutines.delay
-
-
 
 @Composable
 fun HomeHeader(onCartClick: () -> Unit) {
@@ -84,6 +79,7 @@ fun HomeHeader(onCartClick: () -> Unit) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     onMenu: (String) -> Unit,
@@ -91,9 +87,11 @@ fun HomeScreen(
     onProfile: () -> Unit,
     onFavorites: () -> Unit,
     onCart: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onDetails: (String) -> Unit
 ) {
-    var search by remember { mutableStateOf("") }
+    var query by remember { mutableStateOf("") }
+    var active by remember { mutableStateOf(false) }
     var tab by remember { mutableStateOf(0) }
 
     Scaffold(
@@ -119,11 +117,26 @@ fun HomeScreen(
                 .fillMaxSize()
         ) {
             HomeHeader(onCartClick = onCart)
+            SearchBar(
+                query = query,
+                onQueryChange = { query = it },
+                onSearch = { active = false },
+                active = active,
+                onActiveChange = { active = it },
+                placeholder = { Text("Search drinks...") },
+                leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
+                colors = SearchBarDefaults.colors(
+                    containerColor = Color(0xFFF4F4F4),
+                    dividerColor = Color.Transparent
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+            ) {}
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
                     .padding(horizontal = 16.dp, vertical = 12.dp)
-                    .weight(1f)
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
@@ -151,11 +164,112 @@ fun HomeScreen(
                     onSoft = { onMenu("Soft Drink") },
                     onEnergy = { onMenu("Energy Drink") }
                 )
-                Spacer(modifier = Modifier.height(90.dp))
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = "Most Popular",
+                    style = MaterialTheme.typography.titleLarge.copy(
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    ),
+                    modifier = Modifier
+                        .padding(start = 8.dp, bottom = 12.dp)
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    PopularCard(
+                        id = "pineapple",
+                        name = "Pineapple Juice",
+                        imageRes = R.drawable.img_pineapple,
+                        onClick = { productId ->
+                            onDetails(productId)
+                        }
+                    )
+
+                    PopularCard(
+                        id = "choco_milk",
+                        name = "Chocolate Milk",
+                        imageRes = R.drawable.img_chocomilk,
+                        onClick = { productId ->
+                            onDetails(productId)
+                        }
+                    )
+
+                    PopularCard(
+                        id = "fanta",
+                        name = "Fanta Sugarfree",
+                        imageRes = R.drawable.img_fanta,
+                        onClick = { productId ->
+                            onDetails(productId)
+                        }
+                    )
+
+                    PopularCard(
+                        id = "monster",
+                        name = "Monster Energy",
+                        imageRes = R.drawable.img_monster,
+                        onClick = { productId ->
+                            onDetails(productId)
+                        }
+                    )
+                }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
     }
+
+
+@Composable
+private fun PopularCard(
+    id: String,
+    name: String,
+    imageRes: Int,
+    onClick: (String) -> Unit
+) {
+    val gradient = Brush.verticalGradient(
+        listOf(Color(0xFFE0C3FC), Color(0xFF8EC5FC))
+    )
+    Column(
+        modifier = Modifier
+            .width(150.dp)
+            .padding(horizontal = 10.dp)
+            .shadow(8.dp, RoundedCornerShape(18.dp))
+            .clip(RoundedCornerShape(18.dp))
+            .background(gradient)
+            .clickable { onClick(id) }
+            .padding(14.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            painter = painterResource(id = imageRes),
+            contentDescription = name,
+            modifier = Modifier
+                .size(150.dp)
+                .clip(RoundedCornerShape(12.dp)),
+            contentScale = ContentScale.Crop
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = name,
+            style = MaterialTheme.typography.bodyLarge.copy(
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF222222)
+            ),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Text(
+            text = "Rs. 450.00",
+            style = MaterialTheme.typography.bodyMedium.copy(color = Color(0xFF4A4A4A)),
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
 }
+
 
 @Composable
 private fun HeroSection(title: String, onClick: () -> Unit) {
