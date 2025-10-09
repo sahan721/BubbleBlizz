@@ -1,4 +1,5 @@
 package com.example.bubbleblizz.ui.screen
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,7 @@ import com.example.bubbleblizz.util.CartStore
 import com.example.bubbleblizz.util.Catalog
 import com.example.bubbleblizz.util.FavLine
 import com.example.bubbleblizz.util.FavoritesStore
+
 @Composable
 fun ProductDetailsScreen(
     id: String,
@@ -88,7 +90,7 @@ fun ProductDetailsScreen(
                             )
                     ) {
                         Image(
-                            painterResource(Images.ofName(p.drawableName)),
+                            painter = painterResource(Images.ofName(p.drawableName)),
                             contentDescription = p.name,
                             modifier = Modifier
                                 .fillMaxSize()
@@ -107,13 +109,21 @@ fun ProductDetailsScreen(
                 OutlinedButton(
                     onClick = {
                         FavoritesStore.toggle(
-                            FavLine(p.id, p.name, p.size, p.price, p.rating)
+                            FavLine(
+                                id = p.id,
+                                name = p.name,
+                                size = p.size,
+                                price = p.price,
+                                rating = p.rating,
+                                drawableName = p.drawableName
+                            )
+
                         )
                     },
                     modifier = Modifier.weight(1f),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("ADD TO FAVORITE")
+                    Text(text = "ADD TO FAVORITE")
                 }
 
                 Spacer(Modifier.width(12.dp))
@@ -121,7 +131,13 @@ fun ProductDetailsScreen(
                 Button(
                     onClick = {
                         CartStore.add(
-                            CartLine(p.id, p.name, p.size, p.price, 1)
+                            CartLine(
+                                id = p.id,
+                                name = p.name,
+                                sub = p.size,
+                                price = p.price,
+                                qty = 1
+                            )
                         )
                     },
                     modifier = Modifier.weight(1f),
