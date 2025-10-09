@@ -9,6 +9,9 @@ import com.example.bubbleblizz.ui.ThemeViewModel
 import com.example.bubbleblizz.ui.screen.*
 import com.example.bubbleblizz.ui.screen.RegisterScreen
 import com.example.bubbleblizz.ui.screen.LoginScreen
+import com.example.bubbleblizz.ui.screen.CheckoutPaymentScreen
+import com.example.bubbleblizz.ui.screen.CheckoutReviewScreen
+
 
 
 object Route {
