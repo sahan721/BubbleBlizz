@@ -1,5 +1,6 @@
 package com.example.bubbleblizz.ui.screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -7,7 +8,9 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.bubbleblizz.ui.assets.Images
 import com.example.bubbleblizz.ui.component.BubbleBottomBar
 import com.example.bubbleblizz.ui.component.GradientHeader
 import com.example.bubbleblizz.ui.component.BackTopBar
@@ -45,11 +48,12 @@ fun CartScreen(
             Modifier
                 .padding(padding)
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
             GradientHeader(search = search, onSearch = { search = it })
             BackTopBar(title = "My Cart", onBack = onBack)
 
-            // Scrollable content area 🌀
+            // make it Scrollable
             Column(
                 Modifier
                     .padding(horizontal = 16.dp)
@@ -62,6 +66,15 @@ fun CartScreen(
                             .padding(vertical = 8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        Image(
+                            painter = painterResource(
+                                Images.ofName("img_${line.id}")
+                            ),
+                            contentDescription = line.name,
+                            modifier = Modifier
+                                .size(60.dp)
+                                .padding(end = 12.dp)
+                        )
                         Column(Modifier.weight(1f)) {
                             Text(line.name, style = MaterialTheme.typography.titleMedium)
                             Text(line.sub)
