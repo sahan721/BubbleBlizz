@@ -1,14 +1,18 @@
 package com.example.bubbleblizz.ui.screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.bubbleblizz.R
 import com.example.bubbleblizz.ui.component.BackTopBar
 import com.example.bubbleblizz.ui.component.GradientButton
 
@@ -31,8 +35,18 @@ fun LoginScreen(
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
                 .padding(24.dp),
-            verticalArrangement = Arrangement.Center
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top
         ) {
+            Image(
+                painter = painterResource(R.drawable.ic_bubbleblizz_logo),
+                contentDescription = "Bubble Blizz Logo",
+                modifier = Modifier
+                    .size(200.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+            Spacer(Modifier.height(48.dp))
+
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
