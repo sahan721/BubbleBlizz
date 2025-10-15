@@ -6,31 +6,39 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
+
+
 // Light Mode Colors
 private val LightColorScheme = lightColorScheme(
-    primary = Color(0xFFFFC107),
-    secondary = Color(0xFF03A9F4),
-    background = Color(0xFFFFFFFF),
-    surface = Color(0xFFFDFDFD),
-    onPrimary = Color.Black,
-    onSecondary = Color.Black,
+    primary = BrandPrimary,      // Gold beige
+    secondary = BrandSecondary,  // Brown accent
+    tertiary = BrandTertiary,    // Cream background
+    background = BrandTertiary,  // General background
+    surface = SurfaceLight,      // Light surface color
+    onPrimary = Color.White,     // Text/icon color on gold
+    onSecondary = Color.White,   // Text/icon color on brown
+    onTertiary = Color.Black,    // Text on cream
     onBackground = Color.Black,
     onSurface = Color.Black
 )
 
 // Dark Mode Colors
 private val DarkColorScheme = darkColorScheme(
-    primary = Color(0xFFFF9800),
-    secondary = Color(0xFF80D8FF),
-    background = Color(0xFF121212),
-    surface = Color(0xFF1E1E1E),
+    primary = BrandSecondary,    // Brown for dark mode
+    secondary = BrandPrimary,    // Gold accent
+    tertiary = BrandTertiary,    // Optional cream accent
+    background = SurfaceDark,
+    surface = SurfaceDark,
     onPrimary = Color.White,
-    onSecondary = Color.White,
+    onSecondary = Color.Black,
+    onTertiary = Color.Black,
     onBackground = Color.White,
     onSurface = Color.White
 )
 
+
 // Theme Composable
+
 @Composable
 fun BubbleBlizzTheme(
     darkTheme: Boolean = false,
